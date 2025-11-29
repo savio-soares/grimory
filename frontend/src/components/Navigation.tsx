@@ -8,10 +8,10 @@ interface NavigationProps {
 
 export function Navigation({ activeTab, onTabChange }: NavigationProps) {
   const tabs: { id: TabType; label: string; number?: string }[] = [
-    { id: 'month1', label: 'Fundação', number: 'I' },
-    { id: 'month2', label: 'Território', number: 'II' },
-    { id: 'month3', label: 'Caçador', number: 'III' },
-    { id: 'calendar', label: 'Histórico' },
+    { id: 'month1', label: 'Foundation', number: 'I' },
+    { id: 'month2', label: 'Territory', number: 'II' },
+    { id: 'month3', label: 'Hunter', number: 'III' },
+    { id: 'calendar', label: 'History' },
   ];
 
   return (

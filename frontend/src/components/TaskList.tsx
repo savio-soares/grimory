@@ -29,7 +29,7 @@ export function TaskList({ tasks, checks, onToggle }: TaskListProps) {
           {index > 0 && (
             <div className="reset-line">
               <RefreshCcw className="w-3 h-3 mr-2" />
-              Reset Point (Zerar Culpa)
+              Reset Point (Clear Guilt)
             </div>
           )}
 

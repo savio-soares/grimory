@@ -16,12 +16,12 @@ export function BreathingModal({ isOpen, onClose }: BreathingModalProps) {
     >
       <div className="text-center">
         <div className="breathing-circle w-48 h-48 border-4 border-amber-500 rounded-full mx-auto mb-8 shadow-[0_0_50px_rgba(212,175,55,0.3)]" />
-        <p className="text-2xl cinzel text-gray-300 mb-8">Inspire... Expire...</p>
+        <p className="text-2xl cinzel text-gray-300 mb-8">Breathe in... Breathe out...</p>
         <button
           onClick={onClose}
           className="text-gray-500 hover:text-white border-b border-transparent hover:border-white transition-all"
         >
-          Estou Estável
+          I'm Stable
         </button>
       </div>
     </div>
@@ -53,7 +53,7 @@ export function EmergencyButton({ onClick }: EmergencyButtonProps) {
           />
         </svg>
         <span className="absolute right-full mr-3 top-2 bg-black/90 px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-red-900">
-          Perda de Controle?
+          Losing Control?
         </span>
       </button>
     </div>

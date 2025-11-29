@@ -69,25 +69,25 @@ export type TabType = 'month1' | 'month2' | 'month3' | 'calendar';
 
 export const PHASE_INFO: Record<string, PhaseInfo> = {
   month1: {
-    title: "Mês 1: A Fundação (O Observador)",
-    desc: "Objetivo: Regular o sono e criar a âncora mental. O resto é opcional. Se falhar no treino, tudo bem. Não falhe na meditação.",
+    title: "Month 1: The Foundation (The Observer)",
+    desc: "Goal: Regulate sleep and create the mental anchor. Everything else is optional. If you fail at training, it's okay. Don't fail at meditation.",
     level: 1
   },
   month2: {
-    title: "Mês 2: O Território (O Zelador)",
-    desc: "Objetivo: O ambiente reflete a mente. Adicionamos higiene e limpeza leve. Pia limpa é lei.",
+    title: "Month 2: The Territory (The Caretaker)",
+    desc: "Goal: The environment reflects the mind. We add hygiene and light cleaning. Clean sink is law.",
     level: 2
   },
   month3: {
-    title: "Mês 3: O Recipiente (O Caçador)",
-    desc: "Objetivo: Intensidade física e controle alimentar. Domingo é dia de Meal Prep.",
+    title: "Month 3: The Vessel (The Hunter)",
+    desc: "Goal: Physical intensity and dietary control. Sunday is Meal Prep day.",
     level: 3
   }
 };
 
 export const TURN_NAMES: Record<string, string> = {
-  morning: 'Turno da Manhã: O Despertar',
-  day: 'Turno do Dia: A Missão',
-  afternoon: 'Turno da Tarde: O Retorno',
-  night: 'Turno da Noite: O Santuário'
+  morning: 'Morning Turn: The Awakening',
+  day: 'Day Turn: The Mission',
+  afternoon: 'Afternoon Turn: The Return',
+  night: 'Night Turn: The Sanctuary'
 };

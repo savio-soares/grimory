@@ -147,7 +147,7 @@ export function DashboardPage() {
       <div className="min-h-screen flex items-center justify-center">
         <ParticleBackground progress={0} />
         <div className="text-amber-500 text-xl cinzel animate-pulse">
-          Carregando Grimório...
+          Loading Grimoire...
         </div>
       </div>
     );
@@ -163,14 +163,14 @@ export function DashboardPage() {
           <Link
             to="/tasks"
             className="p-2 text-gray-500 hover:text-amber-500 transition-colors"
-            title="Editar Tarefas"
+            title="Edit Tasks"
           >
             <Settings className="w-5 h-5" />
           </Link>
           <button
             onClick={logout}
             className="p-2 text-gray-500 hover:text-red-500 transition-colors"
-            title="Sair"
+            title="Logout"
           >
             <LogOut className="w-5 h-5" />
           </button>

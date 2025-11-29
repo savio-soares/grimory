@@ -1,0 +1,19 @@
+{
+  "name": "Guardian's Grimoire",
+  "short_name": "Grimoire",
+  "description": "A habit tracking system based on the Acting Method inspired by Lord of Mysteries",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d1a",
+  "theme_color": "#1a1a2e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "lifestyle", "health"]
+}

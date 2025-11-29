@@ -22,7 +22,7 @@ export function LoginPage() {
       await login(email, password);
       navigate('/');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao fazer login');
+      setError(err instanceof Error ? err.message : 'Login failed');
     } finally {
       setIsLoading(false);
     }
@@ -36,17 +36,17 @@ export function LoginPage() {
         {/* Logo/Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-100 cinzel mb-2">
-            Grimório do Guardião
+            Guardian's Grimoire
           </h1>
           <p className="text-sm text-amber-500 tracking-widest uppercase">
-            Protocolo de Evolução
+            Evolution Protocol
           </p>
           <div className="w-16 h-1 bg-gradient-to-r from-transparent via-amber-600 to-transparent mx-auto mt-4" />
         </div>
 
         {/* Citação */}
         <blockquote className="text-center text-gray-500 italic text-sm mb-8">
-          "Medo é bom. O medo de continuar na vida bagunçada deve ser maior que a preguiça de mudar."
+          "Fear is good. The fear of staying in a messy life must be greater than the laziness to change."
           <footer className="text-amber-600 mt-1">— Klein Moretti</footer>
         </blockquote>
 
@@ -54,21 +54,21 @@ export function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-xs text-gray-500 uppercase tracking-widest mb-2">
-              Email do Guardião
+              Guardian's Email
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-amber-600 transition-colors"
-              placeholder="guardiao@grimorio.com"
+              placeholder="guardian@grimoire.com"
               required
             />
           </div>
 
           <div>
             <label className="block text-xs text-gray-500 uppercase tracking-widest mb-2">
-              Senha Arcana
+              Arcane Password
             </label>
             <input
               type="password"
@@ -97,10 +97,10 @@ export function LoginPage() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
-                Entrando...
+                Entering...
               </span>
             ) : (
-              'Entrar no Grimório'
+              'Enter the Grimoire'
             )}
           </button>
         </form>
@@ -108,10 +108,10 @@ export function LoginPage() {
         {/* Footer */}
         <div className="mt-8 text-center">
           <p className="text-xs text-gray-600">
-            "Você é um farsante. Aceite isso. Você está fingindo ser organizado."
+            "You are a fraud. Accept it. You're pretending to be organized."
           </p>
           <p className="text-xs text-amber-700 mt-1">
-            Um dia, a máscara cola na cara e vira verdade.
+            One day, the mask sticks to the face and becomes truth.
           </p>
         </div>
       </div>

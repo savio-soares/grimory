@@ -7,8 +7,8 @@ interface CalendarViewProps {
 }
 
 const MONTH_NAMES = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
 export function CalendarView({ history }: CalendarViewProps) {
@@ -90,17 +90,17 @@ export function CalendarView({ history }: CalendarViewProps) {
         <h2 className="text-2xl cinzel text-gray-200">{MONTH_NAMES[month]}</h2>
         <div className="flex gap-2 text-xs">
           <span className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-amber-900/40 border border-amber-500"></div> Digerido
+            <div className="w-3 h-3 bg-amber-900/40 border border-amber-500"></div> Digested
           </span>
           <span className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-red-900/40 border border-red-800"></div> Falha
+            <div className="w-3 h-3 bg-red-900/40 border border-red-800"></div> Failed
           </span>
         </div>
       </div>
 
       {/* Grid do Calendário */}
       <div className="grid grid-cols-7 gap-2 mb-2">
-        {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map(day => (
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
           <div key={day} className="text-center text-xs text-gray-500 pb-2">
             {day}
           </div>
@@ -139,13 +139,13 @@ export function CalendarView({ history }: CalendarViewProps) {
       {/* Journal da Semana Atual */}
       <div className="mt-8 border-t border-gray-800 pt-4">
         <h3 className="cinzel text-amber-600 mb-2 text-center">
-          Análise Semanal (Reality Anchor)
+          Weekly Analysis (Reality Anchor)
         </h3>
         <textarea
           value={journal}
           onChange={(e) => handleJournalChange(e.target.value)}
           onBlur={handleJournalSave}
-          placeholder="Onde eu perdi o controle? Onde eu venci? Escreva brevemente..."
+          placeholder="Where did I lose control? Where did I win? Write briefly..."
           className="w-full bg-black/30 border border-gray-700 rounded p-3 text-sm text-gray-300 focus:border-amber-500 outline-none h-32 resize-none"
         />
       </div>
@@ -153,7 +153,7 @@ export function CalendarView({ history }: CalendarViewProps) {
       {/* Journals Anteriores */}
       {journals.length > 0 && (
         <div className="mt-6 border-t border-gray-800 pt-4">
-          <h3 className="cinzel text-gray-400 mb-3 text-sm">Reflexões Anteriores</h3>
+          <h3 className="cinzel text-gray-400 mb-3 text-sm">Previous Reflections</h3>
           <div className="space-y-2 max-h-48 overflow-y-auto">
             {journals.map((j) => (
               <button
@@ -163,7 +163,7 @@ export function CalendarView({ history }: CalendarViewProps) {
               >
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-amber-600">
-                    Semana: {formatWeek(j.week_start, j.week_end)}
+                    Week: {formatWeek(j.week_start, j.week_end)}
                   </span>
                 </div>
                 {selectedJournal?.id === j.id && j.content && (

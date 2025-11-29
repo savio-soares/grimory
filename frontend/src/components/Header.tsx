@@ -27,15 +27,15 @@ export function Header() {
     <header className="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
       <div>
         <h1 className="text-2xl md:text-3xl font-bold text-gray-100 cinzel">
-          Grimório do Guardião
+          Guardian's Grimoire
         </h1>
         <p className="text-xs text-amber-500 tracking-widest uppercase">
-          Protocolo de Evolução
+          Evolution Protocol
         </p>
       </div>
       <div className="text-right">
         <div className="text-xs text-gray-500 uppercase tracking-widest mb-1">
-          Mana Acumulada
+          Accumulated Mana
         </div>
         <div className="flex items-center justify-end gap-2 text-xl font-mono text-gold">
           <Coins className="w-4 h-4 text-yellow-500" />
@@ -54,7 +54,7 @@ export function Header() {
               onClick={() => setIsEditing(true)}
               className="cursor-pointer hover:text-amber-400 transition-colors min-w-[60px] text-right"
             >
-              R$ {parseFloat(savings || '0').toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+              $ {parseFloat(savings || '0').toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </span>
           )}
         </div>

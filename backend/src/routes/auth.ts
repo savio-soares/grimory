@@ -13,7 +13,7 @@ router.post('/login', async (req, res: Response) => {
     const { email, password }: LoginRequest = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email e senha são obrigatórios' });
+      return res.status(400).json({ error: 'Email and password are required' });
     }
 
     // Buscar usuário
@@ -24,14 +24,14 @@ router.post('/login', async (req, res: Response) => {
       .single();
 
     if (error || !user) {
-      return res.status(401).json({ error: 'Credenciais inválidas' });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     // Verificar senha
     const isValidPassword = await bcrypt.compare(password, user.password_hash);
 
     if (!isValidPassword) {
-      return res.status(401).json({ error: 'Credenciais inválidas' });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     // Gerar token JWT
@@ -53,7 +53,7 @@ router.post('/login', async (req, res: Response) => {
     });
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -67,13 +67,13 @@ router.get('/me', authMiddleware, async (req: AuthRequest, res: Response) => {
       .single();
 
     if (error || !user) {
-      return res.status(404).json({ error: 'Usuário não encontrado' });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     res.json(user);
   } catch (error) {
     console.error('Get me error:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -95,13 +95,13 @@ router.put('/update', authMiddleware, async (req: AuthRequest, res: Response) =>
       .single();
 
     if (error) {
-      return res.status(400).json({ error: 'Erro ao atualizar usuário' });
+      return res.status(400).json({ error: 'Error updating user' });
     }
 
     res.json(user);
   } catch (error) {
     console.error('Update user error:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 

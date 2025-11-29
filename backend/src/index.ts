@@ -4,10 +4,10 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Carregar variáveis de ambiente
+// Load environment variables
 dotenv.config();
 
-// Importar rotas
+// Import routes
 import authRoutes from './routes/auth';
 import tasksRoutes from './routes/tasks';
 import checksRoutes from './routes/checks';
@@ -17,15 +17,15 @@ import journalsRoutes from './routes/journals';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middlewares de Segurança
+// Security Middlewares
 app.use(helmet({
-  contentSecurityPolicy: false, // Desabilitar para permitir inline scripts do frontend
+  contentSecurityPolicy: false, // Disable to allow inline scripts from frontend
 }));
 
-// CORS configurado
+// CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? true // Permitir mesma origem em produção
+    ? true // Allow same origin in production
     : ['http://localhost:5173', 'http://localhost:3000'],
   credentials: true,
 }));
@@ -34,7 +34,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rotas da API
+// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', tasksRoutes);
 app.use('/api/checks', checksRoutes);
@@ -46,26 +46,26 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Servir frontend em produção
+// Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
   const frontendPath = path.join(__dirname, '../../frontend/dist');
   app.use(express.static(frontendPath));
   
-  // Fallback para SPA - Express 5 usa {*path} ao invés de *
+  // Fallback for SPA - Express 5 uses {*path} instead of *
   app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(frontendPath, 'index.html'));
   });
 }
 
-// Error handler global
+// Global error handler
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Error:', err);
-  res.status(500).json({ error: 'Erro interno do servidor' });
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(PORT, () => {
-  console.log(`🔮 Grimório Backend rodando na porta ${PORT}`);
-  console.log(`📍 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔮 Grimoire Backend running on port ${PORT}`);
+  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
 export default app;

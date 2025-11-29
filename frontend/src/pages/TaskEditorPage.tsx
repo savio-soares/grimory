@@ -36,7 +36,7 @@ export function TaskEditorPage() {
 
   const handleCreate = async () => {
     if (!newTask.task_key || !newTask.text) {
-      alert('Preencha a chave e o texto da tarefa');
+      alert('Please fill in the key and task text');
       return;
     }
 
@@ -52,7 +52,7 @@ export function TaskEditorPage() {
       setNewTask({ task_key: '', text: '', turn: 'morning', min_phase: 1, max_phase: null });
       loadTasks();
     } catch (error) {
-      alert(error instanceof Error ? error.message : 'Erro ao criar tarefa');
+      alert(error instanceof Error ? error.message : 'Error creating task');
     }
   };
 
@@ -69,18 +69,18 @@ export function TaskEditorPage() {
       setEditingTask(null);
       loadTasks();
     } catch (error) {
-      alert(error instanceof Error ? error.message : 'Erro ao atualizar tarefa');
+      alert(error instanceof Error ? error.message : 'Error updating task');
     }
   };
 
   const handleDelete = async (taskId: string) => {
-    if (!confirm('Tem certeza que deseja remover esta tarefa?')) return;
+    if (!confirm('Are you sure you want to remove this task?')) return;
 
     try {
       await api.deleteTask(taskId);
       loadTasks();
     } catch (error) {
-      alert(error instanceof Error ? error.message : 'Erro ao remover tarefa');
+      alert(error instanceof Error ? error.message : 'Error removing task');
     }
   };
 
@@ -105,7 +105,7 @@ export function TaskEditorPage() {
       <div className="min-h-screen flex items-center justify-center">
         <ParticleBackground progress={0} />
         <div className="text-amber-500 text-xl cinzel animate-pulse">
-          Carregando...
+          Loading...
         </div>
       </div>
     );
@@ -126,10 +126,10 @@ export function TaskEditorPage() {
           </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-100 cinzel">
-              Editor de Tarefas
+              Task Editor
             </h1>
             <p className="text-xs text-gray-500 uppercase tracking-widest">
-              Customize seu Protocolo
+              Customize Your Protocol
             </p>
           </div>
         </div>
@@ -140,19 +140,19 @@ export function TaskEditorPage() {
           className="w-full mystic-card p-4 rounded-lg flex items-center justify-center gap-2 text-amber-500 hover:text-amber-400 hover:border-amber-600 transition-all mb-6"
         >
           <Plus className="w-5 h-5" />
-          Adicionar Nova Tarefa
+          Add New Task
         </button>
 
         {/* Modal de Criação */}
         {isCreating && (
           <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
             <div className="mystic-card p-6 rounded-xl w-full max-w-md">
-              <h2 className="text-xl cinzel text-amber-500 mb-4">Nova Tarefa</h2>
+              <h2 className="text-xl cinzel text-amber-500 mb-4">New Task</h2>
               
               <div className="space-y-4">
                 <div>
                   <label className="block text-xs text-gray-500 uppercase mb-1">
-                    Chave Única
+                    Unique Key
                   </label>
                   <input
                     type="text"
@@ -165,61 +165,61 @@ export function TaskEditorPage() {
 
                 <div>
                   <label className="block text-xs text-gray-500 uppercase mb-1">
-                    Texto da Tarefa
+                    Task Text
                   </label>
                   <input
                     type="text"
                     value={newTask.text}
                     onChange={(e) => setNewTask({ ...newTask, text: e.target.value })}
-                    placeholder="Descrição da tarefa"
+                    placeholder="Task description"
                     className="w-full bg-black/50 border border-gray-700 rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-amber-600"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs text-gray-500 uppercase mb-1">
-                    Turno
+                    Turn
                   </label>
                   <select
                     value={newTask.turn}
                     onChange={(e) => setNewTask({ ...newTask, turn: e.target.value as Task['turn'] })}
                     className="w-full bg-black/50 border border-gray-700 rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-amber-600"
                   >
-                    <option value="morning">Manhã</option>
-                    <option value="day">Dia</option>
-                    <option value="afternoon">Tarde</option>
-                    <option value="night">Noite</option>
+                    <option value="morning">Morning</option>
+                    <option value="day">Day</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="night">Night</option>
                   </select>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs text-gray-500 uppercase mb-1">
-                      Fase Mínima
+                      Min Phase
                     </label>
                     <select
                       value={newTask.min_phase}
                       onChange={(e) => setNewTask({ ...newTask, min_phase: parseInt(e.target.value) })}
                       className="w-full bg-black/50 border border-gray-700 rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-amber-600"
                     >
-                      <option value={1}>Mês 1</option>
-                      <option value={2}>Mês 2</option>
-                      <option value={3}>Mês 3</option>
+                      <option value={1}>Month 1</option>
+                      <option value={2}>Month 2</option>
+                      <option value={3}>Month 3</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-xs text-gray-500 uppercase mb-1">
-                      Fase Máxima
+                      Max Phase
                     </label>
                     <select
                       value={newTask.max_phase || ''}
                       onChange={(e) => setNewTask({ ...newTask, max_phase: e.target.value ? parseInt(e.target.value) : null })}
                       className="w-full bg-black/50 border border-gray-700 rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-amber-600"
                     >
-                      <option value="">Sem limite</option>
-                      <option value={1}>Mês 1</option>
-                      <option value={2}>Mês 2</option>
-                      <option value={3}>Mês 3</option>
+                      <option value="">No limit</option>
+                      <option value={1}>Month 1</option>
+                      <option value={2}>Month 2</option>
+                      <option value={3}>Month 3</option>
                     </select>
                   </div>
                 </div>
@@ -230,13 +230,13 @@ export function TaskEditorPage() {
                   onClick={() => setIsCreating(false)}
                   className="flex-1 py-2 px-4 border border-gray-700 rounded text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
                 >
-                  Cancelar
+                  Cancel
                 </button>
                 <button
                   onClick={handleCreate}
                   className="flex-1 py-2 px-4 bg-amber-900 hover:bg-amber-800 rounded text-white transition-colors"
                 >
-                  Criar
+                  Create
                 </button>
               </div>
             </div>
@@ -281,29 +281,29 @@ export function TaskEditorPage() {
                               onChange={(e) => setEditingTask({ ...editingTask, turn: e.target.value as Task['turn'] })}
                               className="bg-black/50 border border-gray-700 rounded px-2 py-1 text-gray-300"
                             >
-                              <option value="morning">Manhã</option>
-                              <option value="day">Dia</option>
-                              <option value="afternoon">Tarde</option>
-                              <option value="night">Noite</option>
+                              <option value="morning">Morning</option>
+                              <option value="day">Day</option>
+                              <option value="afternoon">Afternoon</option>
+                              <option value="night">Night</option>
                             </select>
                             <select
                               value={editingTask.min_phase}
                               onChange={(e) => setEditingTask({ ...editingTask, min_phase: parseInt(e.target.value) })}
                               className="bg-black/50 border border-gray-700 rounded px-2 py-1 text-gray-300"
                             >
-                              <option value={1}>Min: Mês 1</option>
-                              <option value={2}>Min: Mês 2</option>
-                              <option value={3}>Min: Mês 3</option>
+                              <option value={1}>Min: Month 1</option>
+                              <option value={2}>Min: Month 2</option>
+                              <option value={3}>Min: Month 3</option>
                             </select>
                             <select
                               value={editingTask.max_phase || ''}
                               onChange={(e) => setEditingTask({ ...editingTask, max_phase: e.target.value ? parseInt(e.target.value) : null })}
                               className="bg-black/50 border border-gray-700 rounded px-2 py-1 text-gray-300"
                             >
-                              <option value="">Max: Sem limite</option>
-                              <option value={1}>Max: Mês 1</option>
-                              <option value={2}>Max: Mês 2</option>
-                              <option value={3}>Max: Mês 3</option>
+                              <option value="">Max: No limit</option>
+                              <option value={1}>Max: Month 1</option>
+                              <option value={2}>Max: Month 2</option>
+                              <option value={3}>Max: Month 3</option>
                             </select>
                           </div>
                           <div className="flex justify-end gap-2">
@@ -339,7 +339,7 @@ export function TaskEditorPage() {
                                 {task.task_key}
                               </span>
                               <span className="text-[10px] text-amber-700 bg-amber-900/20 px-1 rounded">
-                                Fase {task.min_phase}{task.max_phase ? `-${task.max_phase}` : '+'}
+                                Phase {task.min_phase}{task.max_phase ? `-${task.max_phase}` : '+'}
                               </span>
                             </div>
                           </div>
