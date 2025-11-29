@@ -12,7 +12,10 @@ router.post('/login', async (req, res: Response) => {
   try {
     const { email, password }: LoginRequest = req.body;
 
+    console.log('[DEBUG] Login attempt for:', email);
+
     if (!email || !password) {
+      console.log('[DEBUG] Missing email or password');
       return res.status(400).json({ error: 'Email and password are required' });
     }
 
@@ -23,18 +26,32 @@ router.post('/login', async (req, res: Response) => {
       .eq('email', email.toLowerCase())
       .single();
 
+    console.log('[DEBUG] Supabase query result:', { 
+      userFound: !!user, 
+      error: error?.message,
+      userEmail: user?.email 
+    });
+
     if (error || !user) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      console.log('[DEBUG] User not found or Supabase error');
+      return res.status(401).json({ error: 'Invalid credentials', debug: { userFound: false, supabaseError: error?.message } });
     }
 
     // Verificar senha
+    console.log('[DEBUG] Comparing passwords...');
+    console.log('[DEBUG] Hash in DB:', user.password_hash?.substring(0, 20) + '...');
+    
     const isValidPassword = await bcrypt.compare(password, user.password_hash);
+    console.log('[DEBUG] Password valid:', isValidPassword);
 
     if (!isValidPassword) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'Invalid credentials', debug: { userFound: true, passwordMatch: false } });
     }
 
     // Gerar token JWT
+    console.log('[DEBUG] JWT_SECRET exists:', !!process.env.JWT_SECRET);
+    console.log('[DEBUG] JWT_SECRET length:', process.env.JWT_SECRET?.length);
+    
     const signOptions: SignOptions = { 
       expiresIn: '7d' 
     };
@@ -44,6 +61,8 @@ router.post('/login', async (req, res: Response) => {
       signOptions
     );
 
+    console.log('[DEBUG] Token generated successfully');
+
     // Retornar usuário sem senha
     const { password_hash, ...userWithoutPassword } = user;
 
@@ -52,8 +71,8 @@ router.post('/login', async (req, res: Response) => {
       user: userWithoutPassword,
     });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('[DEBUG] Login error:', error);
+    res.status(500).json({ error: 'Internal server error', debug: String(error) });
   }
 });
 
