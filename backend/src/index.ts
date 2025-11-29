@@ -51,8 +51,8 @@ if (process.env.NODE_ENV === 'production') {
   const frontendPath = path.join(__dirname, '../../frontend/dist');
   app.use(express.static(frontendPath));
   
-  // Fallback para SPA
-  app.get('*', (req, res) => {
+  // Fallback para SPA - Express 5 usa {*path} ao invés de *
+  app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(frontendPath, 'index.html'));
   });
 }
